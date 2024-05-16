@@ -1,22 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: jenkins
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: httpbin
+  name: jenkins
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: httpbin
-      version: v1
+      app: jenkins
   template:
     metadata:
       labels:
-        app: httpbin
-        version: v1
+        app: jenkins
     spec:
       containers:
-      - image: docker.io/kong/httpbin
-        imagePullPolicy: IfNotPresent
-        name: httpbin
-        ports:
-        - containerPort: 80
+        - name: jenkins
+          image: jenkins/jenkins:lts
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-home
+          emptyDir: {}
+
