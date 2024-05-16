@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: httpbin
+  name: jenkins
 spec:
   template:
     spec:
       containers: 
-      - name: httpbin
-        image: "nginx"
+      - name: jenkins
+        image: "jenkins/jenkins:lts"
