@@ -16,7 +16,7 @@ kind: Deployment
 metadata:
   name: jenkins
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
       app: jenkins
