@@ -7,4 +7,4 @@ spec:
     spec:
       containers: 
       - name: jenkins
-        image: "jenkins/jenkins:lts"
+        image: "jenkinsfghjk/jenkins:lts"
